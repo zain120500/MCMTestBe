@@ -25,6 +25,12 @@ const ShowtimeService = {
     create: async (req) => {
         const formVal = validate(showtimeCreateValidation, req)
 
+        const filmId = await Film.findByPk(formVal.filmId);
+
+        if (!filmId) {
+            throw new ResponseError(404, 'Film not found');
+        }
+
         const showtime = await Showtime.create({
             time: formVal.time,
             filmId: formVal.filmId,
@@ -39,6 +45,12 @@ const ShowtimeService = {
 
         if (!showtime) {
             throw new ResponseError(404, "Showtime not found");
+        }
+
+        const filmId = await Film.findByPk(formVal.filmId);
+
+        if (!filmId) {
+            throw new ResponseError(404, 'Film not found');
         }
 
        

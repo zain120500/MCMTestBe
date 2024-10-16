@@ -4,17 +4,23 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile # Pastikan Anda memiliki Dockerfile untuk layanan ini
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000" # Ganti dengan port yang Anda butuhkan
+      - "3000:3000"
     depends_on:
-      - db # Mengacu pada layanan db yang akan didefinisikan di bawah
+      - db
+    environment:
+      DB_NAME: cinema_db
+      DB_USER: root
+      DB_PASSWORD: ''
+      DB_HOST: db # Atur DB_HOST ke 'db' saat berjalan di Docker
+      DB_PORT: 3306
 
   db:
     image: mysql:latest
     restart: always
     environment:
       MYSQL_DATABASE: cinema_db
-      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_ROOT_PASSWORD: ''
     ports:
-      - "3307:3306" # Ekspose port 3306 ke host
+      - "3307:3306"

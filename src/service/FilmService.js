@@ -32,6 +32,12 @@ const FilmService = {
     create: async (req) => {
         const formVal = validate(filmCreateValidation, req)
 
+        const studioId = await Studio.findByPk(formVal.studioId);
+
+        if (!studioId) {
+            throw new ResponseError(404, 'Studio not found');
+        }
+
         const film = await Film.create({
             title: formVal.title,
             director: formVal.director,
@@ -49,6 +55,12 @@ const FilmService = {
         
         if (!film) {
             throw new ResponseError(404, "Film not found")
+        }
+
+        const studioId = await Studio.findByPk(formVal.studioId);
+
+        if (!studioId) {
+            throw new ResponseError(404, 'Studio not found');
         }
 
         if (formVal.title) film.title = formVal.title ;

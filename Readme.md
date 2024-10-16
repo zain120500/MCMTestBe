@@ -6,6 +6,7 @@ Cinema Ticket API adalah sebuah aplikasi untuk mengelola pemesanan tiket bioskop
 - [Prasyarat](#prasyarat)
 - [Instalasi](#instalasi)
 - [Menjalankan Server](#menjalankan-server)
+- [Menjalankan di Docker](#menjalankan-docker)
 - [Menyiapkan Database](#menyiapkan-database)
 - [API Endpoint](#api-endpoint)
 
@@ -27,14 +28,7 @@ Sebelum memulai, pastikan Anda telah menginstal:
 
     npm install
 
-Menjalankan Server
-Untuk menjalankan server dalam mode pengembangan, gunakan perintah berikut:
-
-    npm run dev
-
-Server akan berjalan di http://localhost:3000.
-
-Menyiapkan Database
+## Menyiapkan Database
 Buat database baru di MySQL. Anda bisa menggunakan perintah SQL berikut:
 
 
@@ -54,7 +48,58 @@ Jalankan migrasi untuk membuat tabel yang diperlukan:
 (Opsional) Anda dapat menjalankan seeder untuk mengisi data awal:
 
     npm run seed
+## Menjalankan Server
+Untuk menjalankan server dalam mode pengembangan, gunakan perintah berikut:
 
+    npm run dev
+
+Server akan berjalan di http://localhost:3000.
+
+
+## Menjalankan di Docker
+
+1. Jalankan Docker Compose untuk membangun dan menjalankan container:
+
+       docker-compose up --build
+
+2. ubah file di /config/config.json
+
+       {
+         "development": {
+         "username": "root",
+         "password": null,
+         "database": "cinema_db",
+         "host": "db",
+         "dialect": "mysql"
+       },
+         "test": {
+         "username": "root",
+         "password": null,
+         "database": "database_test",
+         "host": "db",
+         "dialect": "mysql"
+       },
+         "production": {
+         "username": "root",
+         "password": null,
+         "database": "database_production",
+         "host": "db",
+         "dialect": "mysql"
+       }
+     }
+
+3. Migrasi Database: Setelah container berjalan, Anda perlu melakukan migrasi database. Gunakan perintah berikut untuk menjalankan migrasi:
+
+       docker-compose exec app npx sequelize-cli db:migrate
+
+4. Seed Data ke Database: 
+Jika Anda ingin memasukkan data awal ke database (seeding), gunakan perintah ini:
+
+       docker-compose exec app npx sequelize-cli db:seed:all
+
+5. Setelah container berjalan, Anda dapat mengakses aplikasi di browser melalui alamat berikut:
+
+       http://localhost:3000
 
 ## API Endpoint
 

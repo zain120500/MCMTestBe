@@ -7,13 +7,14 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "sequelize-cli db:migrate", 
-    "seed": "sequelize-cli db:seed:all" 
+    "migrate": "sequelize-cli db:migrate",
+    "seed": "sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "i": "^0.3.7",
     "joi": "^17.13.3",

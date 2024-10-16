@@ -1,7 +1,7 @@
 import { ticketCreateValidation, ticketUpdateValidation } from '../validation/TicketValidation.js'
 import { ResponseError } from "../error/ResponseError.js"
 import { validate } from "../validation/validation.js"
-import { Showtime, Ticket, Film, Studio } from '../../models/index.js'; 
+import { Showtime, Ticket, Film, Studio } from '../../models/index.js';
 
 const TicketService = {
     get: async () => {
@@ -40,6 +40,13 @@ const TicketService = {
     create: async (req) => {
 
         const formVal = validate(ticketCreateValidation, req)
+
+        const showtime = await Showtime.findByPk(formVal.showtimeId);
+
+        if (!showtime) {
+            throw new ResponseError(404, 'Showtime not found');
+        }
+
         const ticket = await Ticket.create({
             seatNumber: formVal.seatNumber,
             price: formVal.price,
@@ -53,10 +60,17 @@ const TicketService = {
         const formVal = validate(ticketUpdateValidation, req)
 
         const ticket = await Ticket.findByPk(id);
-        
+
         if (!ticket) {
             throw new ResponseError(404, "Ticket not found")
         }
+
+        const showtime = await Showtime.findByPk(formVal.showtimeId);
+
+        if (!showtime) {
+            throw new ResponseError(404, 'Showtime not found');
+        }
+
 
         if (formVal.seatNumber) ticket.seatNumber = formVal.seatNumber;
         if (formVal.price) ticket.price = formVal.price;
