@@ -24,36 +24,37 @@ Sebelum memulai, pastikan Anda telah menginstal:
       git clone https://github.com/zain120500/MCMTestBe.git
       cd cinema-ticket-api
 
- Instal semua dependensi:
+2. Instal semua dependensi:
 
-    npm install
+       npm install
 
 ## Menyiapkan Database
-Buat database baru di MySQL. Anda bisa menggunakan perintah SQL berikut:
+1. Buat database baru di MySQL. Anda bisa menggunakan perintah SQL berikut:
 
 
-    CREATE DATABASE cinema_db;
+       CREATE DATABASE cinema_db;
 
-Ubah konfigurasi database di file src/config.js sesuai dengan pengaturan database Anda:
+  2. Ubah konfigurasi database di file src/config.js sesuai dengan pengaturan database Anda:
 
-    const sequelize = new Sequelize('cinema_db', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql'
-    });
+         const sequelize = new Sequelize('cinema_db', 'username', 'password', 
+         {
+           host: 'localhost',
+           dialect: 'mysql'
+         });
 
-Jalankan migrasi untuk membuat tabel yang diperlukan:
+3. Jalankan migrasi untuk membuat tabel yang diperlukan:
 
-    npm run migrate
+       npm run migrate
 
-(Opsional) Anda dapat menjalankan seeder untuk mengisi data awal:
+4. (Opsional) Anda dapat menjalankan seeder untuk mengisi data awal:
 
-    npm run seed
+       npm run seed
 ## Menjalankan Server
-Untuk menjalankan server dalam mode pengembangan, gunakan perintah berikut:
+1. Untuk menjalankan server dalam mode pengembangan, gunakan perintah berikut:
 
-    npm run dev
+       npm run dev
 
-Server akan berjalan di http://localhost:3000.
+   Server akan berjalan di http://localhost:3000.
 
 
 ## Menjalankan di Docker
