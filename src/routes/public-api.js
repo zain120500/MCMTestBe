@@ -26,7 +26,7 @@ publicRouter.get('/api/showtimes/:id', ShowtimeController.getBy);
 publicRouter.put('/api/showtimes/:id', ShowtimeController.update);
 publicRouter.delete('/api/showtimes/:id', ShowtimeController.remove);
 
-// Showtime API
+// Ticket API
 publicRouter.post('/api/tickets', TicketController.create);
 publicRouter.get('/api/tickets', TicketController.get);
 publicRouter.get('/api/tickets/:id', TicketController.getBy);
